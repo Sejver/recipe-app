@@ -4,6 +4,7 @@ import jasko.jasmin.recipe.domain.*;
 import jasko.jasmin.recipe.repositories.CategoryRepository;
 import jasko.jasmin.recipe.repositories.RecipeRepository;
 import jasko.jasmin.recipe.repositories.UnitOfMeasureRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Component
 public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
 
@@ -32,6 +34,7 @@ public class DataLoader implements ApplicationListener<ContextRefreshedEvent> {
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
 
+        log.debug("Loading bootstrap");
         recipeRepository.saveAll(getRecipes());
     }
     private List<Recipe> getRecipes(){
